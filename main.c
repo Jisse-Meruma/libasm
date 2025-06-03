@@ -2,6 +2,7 @@
 #include "libasm.h"
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 void test_ft_strlen() 
 {
@@ -74,6 +75,27 @@ void test_ft_read()
     }
 }
 
+void test_ft_strdup() 
+{
+    char *str1 = "Hello, World!";
+    char *str2 = "Libasm is great!";
+    char *str3 = "";
+
+    printf("\nTesting ft_strdup:\n");
+    char *dup1 = ft_strdup(str1);
+    char *dup2 = ft_strdup(str2);
+    char *dup3 = ft_strdup(str3);
+
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str1, dup1, strdup(str1));
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str2, dup2, strdup(str2));
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str3, dup3, strdup(str3));
+
+    // Free the duplicated strings
+    free(dup1);
+    free(dup2);
+    free(dup3);
+}
+
 int main() 
 {
     test_ft_strlen();
@@ -81,6 +103,7 @@ int main()
     test_ft_strcmp();
     test_ft_write();
     test_ft_read();
+    test_ft_strdup();
     
 }
 

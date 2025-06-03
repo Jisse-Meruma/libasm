@@ -43,11 +43,44 @@ void test_ft_strcmp()
     printf("Comparing '%s' and '%s': %d | correct_output: %d\n", str1, str4, ft_strcmp(str1, str4), strcmp(str1, str4));
 }
 
+void test_ft_write() 
+{
+    const char *message = "Hello, World!\n";
+    printf("\nTesting ft_write:\n");
+    ssize_t result = ft_write(1, message, 14); // 14 is the length of the message including newline
+    printf("ft_write returned: %zd | correct_output: %zd\n", result, write(1, message, 14));
+    // Check if errno is set when ft_write fails
+    ssize_t error = ft_write(-1, message, 14); // Intentionally passing an invalid file descriptor
+    if (error == -1) {
+        perror("ft_write failed");
+    }
+    
+}
+
+void test_ft_read() 
+{
+    char buffer[50];
+    printf("\nTesting ft_read:\n");
+    ssize_t result = ft_read(0, buffer, 50); // Read from standard input
+    
+    if (result >= 0) {
+        buffer[result] = '\0'; // Null-terminate the string
+        printf("ft_read returned: %zd | Read content: %s\n", result, buffer);
+    }
+    result = ft_read(-1, buffer, 50); // Read from standard input
+
+    if (result == -1) {
+        perror("ft_read failed");
+    }
+}
+
 int main() 
 {
     test_ft_strlen();
     test_ft_strcpy();
     test_ft_strcmp();
+    test_ft_write();
+    test_ft_read();
     
 }
 

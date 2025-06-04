@@ -6,6 +6,8 @@ OBJ_DIR := ./obj
 
 OBJ 	:= $(addprefix $(OBJ_DIR)/,$(SRC:.s=.o))
 
+CC	  := gcc # Compiler to use
+
 all: $(NAME)
 
 run: all

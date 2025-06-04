@@ -96,6 +96,52 @@ void test_ft_strdup()
     free(dup3);
 }
 
+void test_ft_push_front() 
+{
+    t_list *list = NULL;
+    char* data1 = "42";
+    char* data2 = "84";
+    char* data3 = "21";
+
+    printf("\nTesting ft_list_push_front:\n");
+    ft_list_push_front(&list, data1);
+    printf("First element: %s\n", (char *)list->data);
+
+    ft_list_push_front(&list, data2);
+    printf("New first element: %s\n", (char *)list->data);
+
+    ft_list_push_front(&list, data3);
+    printf("New first element: %s\n\n", (char *)list->data);
+
+    printf("first element %s\n", (char *)list->data);
+    printf("second element %s\n", (char *)list->next->data);
+    printf("third element %s\n", (char *)list->next->next->data);
+
+    // Clean up the list
+    free(list);
+}
+
+void test_ft_list_size() 
+{
+    t_list *list = NULL;
+    char* data1 = "42";
+    char* data2 = "84";
+    char* data3 = "21";
+
+    printf("\nTesting ft_list_size:\n");
+    ft_list_push_front(&list, data1);
+    printf("List size after adding first element: %d\n", ft_list_size(list));
+
+    ft_list_push_front(&list, data2);
+    printf("List size after adding second element: %d\n", ft_list_size(list));
+
+    ft_list_push_front(&list, data3);
+    printf("List size after adding third element: %d\n", ft_list_size(list));
+
+    // Clean up the list
+    free(list);
+}
+
 int main() 
 {
     test_ft_strlen();
@@ -104,6 +150,9 @@ int main()
     test_ft_write();
     test_ft_read();
     test_ft_strdup();
+
+    test_ft_push_front();
+    test_ft_list_size();
     
 }
 

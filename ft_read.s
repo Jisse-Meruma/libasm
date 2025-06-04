@@ -10,25 +10,16 @@ global ft_read
 extern __errno_location
 
 ft_read:
-    ; syscall read = 0
-    mov rax, 0
-    ; the reason this works is because syscall uses rdi, rsi, rdx the exact way we recieve the data so we dont need to move any data to other locations
-    syscall
-
-    ; dit the read syscall return a negative value then we need to handle the error.
-    cmp rax, 0
+    mov rax, 0 ; syscall read = 0
+    syscall ; the reason this works is because syscall uses rdi, rsi, rdx the exact way we recieve the data so we dont need to move any data to other locations
+    cmp rax, 0 ; did the read syscall return a negative value then we need to handle the error.
     jl .error
     ret
 
 .error:
-    ; make a positive errno value
-    neg rax
-    ; we need to save the data since calling errno location will overwrite rax
-    mov rcx, rax
-
-    call __errno_location
-    ; __errno_location sets rax as a pointer to errno. 
-    mov [rax], rcx
-    ; after setting errno we overwrite rax to -1 since we need to return -1 when an error occurd.
-    mov rax, -1
+    neg rax ; make a positive errno value
+    mov rcx, rax ; we need to save the data since calling errno location will overwrite rax
+    call __errno_location wrt ..plt
+    mov [rax], rcx ; __errno_location sets rax as a pointer to errno. 
+    mov rax, -1 ; after setting errno we overwrite rax to -1 since we need to return -1 when an error occurd.
     ret

@@ -4,7 +4,6 @@ global ft_strcmp
 ; int     ft_strcmp(const char *s1, const char *s2);
 ; rdi = char* s1
 ; rsi = char* s2
-
 ft_strcmp:
 
 .loop:
@@ -28,7 +27,6 @@ ft_strcmp:
     ; mov al, cl → al = 0xFB (only low 8 bits, no extension)
     ; movsx rax, cl → rax = 0xFFFFFFFFFFFFFFFB (64-bit sign-extended -5)
     ; movzx rax, cl → rax = 0x00000000000000FB (64-bit zero-extended 251 unsigned)
-
     movsx rax, cl
     ret
     

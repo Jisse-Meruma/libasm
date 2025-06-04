@@ -20,14 +20,26 @@ ft_list_remove_if:
     push r13
     push r14
     push r15
-    mov r12 rdi
-    mov r13 rsi
-    mov r14 rdx
-    mov r15 rcx
+    push rbx
+    xor rbx, rbx
+    mov r12, rdi ; **begin_list
+    mov r13, rsi ; *data_ref
+    mov r14, rdx ; (*cmp)()
+    mov r15, rcx ; (*free_fct)(void*)
     test r12, r12
     jz .end
+
+.loop:
+    mov rbx, [r12] ; copy node struct out of head
+    mov rdi, [rbx + t_list.data]
+    mov rsi, r13
     call r14
+    test rax, rax ; test if cmp func returned 0
+    jz .remove_node
     
+
+
+
 
     
 
@@ -46,9 +58,10 @@ ft_list_remove_if:
 
 
 .end:
-    push r15
-    push r14
-    push r13
-    push r12
+    pop rbx
+    pop r15
+    pop r14
+    pop r13
+    pop r12
     ret
 

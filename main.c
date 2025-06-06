@@ -130,6 +130,7 @@ void test_ft_list_size()
 
     printf("\nTesting ft_list_size:\n");
     ft_list_push_front(&list, data1);
+    printf("\n Adding first element: %s\n", (char *)list->data);
     printf("List size after adding first element: %d\n", ft_list_size(list));
 
     ft_list_push_front(&list, data2);
@@ -142,19 +143,55 @@ void test_ft_list_size()
     free(list);
 }
 
+void test_ft_list_remove_if() 
+{
+    t_list *list = NULL;
+    char* data1 = ft_strdup("42");
+    char* data2 = ft_strdup("84");
+    // char* data3 = ft_strdup("22");
+    // char* data4 = ft_strdup("21"); // Duplicate to test removal
+
+    printf("\nTesting ft_list_remove_if:\n");
+    ft_list_push_front(&list, data1);
+    ft_list_push_front(&list, data2);
+    // ft_list_push_front(&list, data3);
+    // ft_list_push_front(&list, data4);
+
+    printf("List size before removal: %d\n", ft_list_size(list));
+
+    // Remove elements equal to "42"
+    ft_list_remove_if(&list, "42", (int (*)(void*, void*))strcmp, free);
+
+    printf("List size after removal: %d\n", ft_list_size(list));
+
+    // Print remaining elements
+    t_list *current = list;
+    while (current) {
+        printf("Remaining element: %s\n", (char *)current->data);
+        current = current->next;
+    }
+
+    // Clean up the list
+    free(list);
+}
+
 int main() 
 {
     test_ft_strlen();
     test_ft_strcpy();
     test_ft_strcmp();
     test_ft_write();
-    test_ft_read();
+    // test_ft_read();
     test_ft_strdup();
 
     test_ft_push_front();
     test_ft_list_size();
+    test_ft_list_remove_if();
     
 }
+
+
+
 
 
 

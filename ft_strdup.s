@@ -14,6 +14,7 @@ ft_strdup:
     ; now we are free to use rdi as size of string since that is what malloc uses
     ; rax has the stored return of ft_strlen
     mov rdi, rax
+    inc rdi
     ; malloc uses rdi as amount of bytes to allocate
     ; rax will be the pointer to the allocated array
     call malloc wrt ..plt

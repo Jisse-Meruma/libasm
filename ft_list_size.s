@@ -10,16 +10,19 @@ global ft_list_size
 ; int ft_list_size(t_list *begin_list);
 ; rdi = *begin_list
 ft_list_size:
+    push r12
     xor rax, rax ; set rax to 0
-    cmp qword rdi, 0 ; check if pointer is NULL
-    je .end
+    mov r12, rdi
+    test r12, r12 ; check if pointer is NULL
+    jz .end
 
 .loop:
-    cmp qword [rdi + t_list.next], 0 ; check if node->*next is NULL
-    je .end
-    mov rdi, [rdi + t_list.next] ; Move the pointer to *next and dereference
     inc rax ; Increment Counter
+    cmp qword [r12 + t_list.next], 0 ; check if node->*next is NULL
+    je .end
+    mov r12, qword [r12 + t_list.next] ; Move the pointer to *next and dereference
     jmp .loop
 
 .end:
+    pop r12
     ret

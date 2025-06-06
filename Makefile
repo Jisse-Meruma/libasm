@@ -15,7 +15,7 @@ run: all
 	./$(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) main.c $(OBJ) -o $(NAME)
+	$(CC) main.c  $(OBJ) -o $(NAME)
 
 $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)

@@ -33,10 +33,10 @@ void test_ft_strcpy()
 
 void test_ft_strcmp() 
 {
-    char *str1 = "Hello";
-    char *str2 = "Helloo";
-    char *str3 = "World";
-    char *str4 = "";
+    char *str1 = "1";
+    char *str2 = "2";
+    char *str3 = "3";
+    char *str4 = "0";
 
     printf("\nTesting ft_strcmp:\n");
     printf("Comparing '%s' and '%s': %d | correct_output: %d\n", str1, str2, ft_strcmp(str1, str2), strcmp(str1, str2));
@@ -175,6 +175,41 @@ void test_ft_list_remove_if()
     free(list);
 }
 
+void test_ft_list_sort() 
+{
+    t_list *list = NULL;
+    char* data1 = "1";
+    char* data2 = "3";
+    char* data3 = "2";
+
+    printf("\nTesting ft_list_sort:\n");
+    ft_list_push_front(&list, data1);
+    ft_list_push_front(&list, data2);
+    ft_list_push_front(&list, data3);
+
+    printf("List before sorting:\n");
+    t_list *current = list;
+    while (current) {
+        printf("%s\n", (char *)current->data);
+        current = current->next;
+    }
+
+    printf("\nSorting the list...\n");
+
+    // Sort the list
+    ft_list_sort(&list, (int (*)(void*, void*))strcmp);
+
+    printf("List after sorting:\n");
+    current = list;
+    while (current) {
+        printf("%s\n", (char *)current->data);
+        current = current->next;
+    }
+
+    // Clean up the list
+    free(list);
+}
+
 int main() 
 {
     test_ft_strlen();
@@ -187,8 +222,12 @@ int main()
     test_ft_push_front();
     test_ft_list_size();
     test_ft_list_remove_if();
+    test_ft_list_sort();
     
 }
+
+
+
 
 
 

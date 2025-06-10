@@ -223,7 +223,26 @@ int main()
     test_ft_list_size();
     test_ft_list_remove_if();
     test_ft_list_sort();
+    test_ft_atoi_base();  
+}
+
+int ft_atoi_base(char* str, char* base)
+{
+    int i = 0;
+    int sign = 0;
+
+    while (isspace(str[i]))
+        i++;
+    while (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
+    {
+        i++;
+        sign++;
+    }
+    sign = sign % 2;
+    if (sign == 1)
+        sign = -1;
     
+
 }
 
 

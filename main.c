@@ -147,15 +147,15 @@ void test_ft_list_remove_if()
 {
     t_list *list = NULL;
     char* data1 = ft_strdup("42");
-    char* data2 = ft_strdup("84");
-    // char* data3 = ft_strdup("22");
-    // char* data4 = ft_strdup("21"); // Duplicate to test removal
+    char* data2 = ft_strdup("42");
+    char* data3 = ft_strdup("42");
+    char* data4 = ft_strdup("42"); // Duplicate to test removal
 
     printf("\nTesting ft_list_remove_if:\n");
     ft_list_push_front(&list, data1);
     ft_list_push_front(&list, data2);
-    // ft_list_push_front(&list, data3);
-    // ft_list_push_front(&list, data4);
+    ft_list_push_front(&list, data3);
+    ft_list_push_front(&list, data4);
 
     printf("List size before removal: %d\n", ft_list_size(list));
 

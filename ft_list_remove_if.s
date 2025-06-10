@@ -80,16 +80,17 @@ ft_list_remove_if:
     jmp .loop
 
 .check_final:
-    mov rbx, [r12] ; 
-    mov rdi, [rbx + t_list.data]
+    mov rbx, [r12] ; node = *begin_list 
+    mov rdi, [rbx + t_list.data] 
     mov rsi, r13
-    call r14
+    call r14 ; compare with the cmp function
     test rax, rax
-    jz .end
+    jnz .end
     mov rdi, [rbx + t_list.data]
-    call r15
+    call r15 ; free the data object inside the struct
     mov rdi, [rbx + t_list.next]
     mov [r12], rdi
+    mov rdi, rbx ; move node to rdi to be freed
     call free wrt ..plt
     jmp .end
 

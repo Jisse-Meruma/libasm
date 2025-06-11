@@ -119,12 +119,12 @@ ft_atoi_base:
     cmp byte [rsi], 0
     je .loop2
     cmp byte [rsi], dl ; check if the basenumber is equeal and return the index (aka value)
-    je .setbaseNumb
+    je .setBaseNumb
     inc rcx ; index++
     inc rsi ; base++
     jmp .getBaseNumb
 
-.setbaseNumb:
+.setBaseNumb:
     mov rax, rcx ; return the index of the base array
     jmp .loop2
 

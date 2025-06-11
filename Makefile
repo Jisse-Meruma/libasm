@@ -19,7 +19,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)/%.o: %.s | $(OBJ_DIR)
 	@mkdir -p $(OBJ_DIR)
-	nasm -f elf64 -g -F dwarf $< -o $@
+	nasm -f elf64 -F dwarf $< -o $@
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)

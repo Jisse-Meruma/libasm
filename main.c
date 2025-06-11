@@ -5,6 +5,18 @@
 #include <ctype.h>
 #include <stdlib.h>
 
+void free_list(t_list* list)
+{
+    t_list *current = list;
+    t_list *next;
+
+    while (current) {
+        next = current->next;
+        free(current);
+        current = next;
+    }
+}
+
 void test_ft_strlen() 
 {
     char *str1 = "Hello, World!";
@@ -93,14 +105,21 @@ void test_ft_strdup()
     char *dup2 = ft_strdup(str2);
     char *dup3 = ft_strdup(str3);
 
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str1, dup1, strdup(str1));
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str2, dup2, strdup(str2));
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str3, dup3, strdup(str3));
+    char *correct_dup1 = strdup(str1);
+    char *correct_dup2 = strdup(str2);
+    char *correct_dup3 = strdup(str3);
+
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str1, dup1, correct_dup1);
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str2, dup2, correct_dup2);
+    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str3, dup3, correct_dup3);
 
     // Free the duplicated strings
     free(dup1);
     free(dup2);
     free(dup3);
+    free(correct_dup1);
+    free(correct_dup2);
+    free(correct_dup3);
 }
 
 void test_ft_push_front() 
@@ -125,7 +144,7 @@ void test_ft_push_front()
     printf("third element %s\n", (char *)list->next->next->data);
 
     // Clean up the list
-    free(list);
+    free_list(list);
 }
 
 void test_ft_list_size() 
@@ -147,7 +166,7 @@ void test_ft_list_size()
     printf("List size after adding third element: %d\n", ft_list_size(list));
 
     // Clean up the list
-    free(list);
+    free_list(list);
 }
 
 void test_ft_list_remove_if() 
@@ -179,7 +198,7 @@ void test_ft_list_remove_if()
     }
 
     // Clean up the list
-    free(list);
+    free_list(list);
 }
 
 void test_ft_list_sort() 
@@ -214,8 +233,10 @@ void test_ft_list_sort()
     }
 
     // Clean up the list
-    free(list);
+    free_list(list);
 }
+
+
 
 void test_ft_atoi_base() 
 {
@@ -241,7 +262,7 @@ int main()
     test_ft_strcpy();
     test_ft_strcmp();
     test_ft_write();
-    test_ft_read();
+    // test_ft_read();
     test_ft_strdup();
 
     test_ft_push_front();

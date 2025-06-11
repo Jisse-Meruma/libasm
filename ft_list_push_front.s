@@ -23,6 +23,7 @@ ft_list_push_front:
     cmp rax, 0 ; did malloc fail?
     je .end
     mov qword [rax + t_list.data], rsi ; set the data into the struct
+    mov qword [rax + t_list.next], 0
     cmp qword [rdi], 0 ; is it an empty list?
     je .push_front
     mov rdx, qword [rdi]

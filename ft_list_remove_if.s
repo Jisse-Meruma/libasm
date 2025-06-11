@@ -46,6 +46,8 @@ ft_list_remove_if:
     push r15
     push rbx
     push rbp
+    push rbp ; need for stinky stack alligment
+
     xor rbx, rbx ; current node
     xor rbp, rbp ; remove node
     mov r12, rdi ; **begin_list
@@ -65,7 +67,7 @@ ft_list_remove_if:
     mov rdi, [rbp + t_list.data] ; node->next->data
     mov rsi, r13 ; *data_ref
     call r14 ; call cmp
-    test rax, rax ; test if cmp func returned 0
+    test rax, rax ; test if cmp func returned 0 
     jz .remove_node
     mov rbx, [rbx + t_list.next] ; node = node->next
     jmp .loop
@@ -96,6 +98,7 @@ ft_list_remove_if:
 
 
 .end:
+    pop rbp
     pop rbp
     pop rbx
     pop r15

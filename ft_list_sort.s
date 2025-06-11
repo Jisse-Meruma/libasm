@@ -36,6 +36,7 @@ ft_list_sort:
     push r13
     push r14
     push r15
+    push r15 ; for stinky stack alligment
 
     mov r13, rsi ; cmp
     mov r15, rdi ; **begin_list
@@ -64,6 +65,7 @@ ft_list_sort:
    jmp .loop
 
 .end:
+    pop r15
     pop r15
     pop r14
     pop r13

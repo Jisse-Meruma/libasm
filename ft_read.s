@@ -19,7 +19,9 @@ ft_read:
 .error:
     neg rax ; make a positive errno value
     mov rcx, rax ; we need to save the data since calling errno location will overwrite rax
+    push rcx
     call __errno_location wrt ..plt
+    pop rcx
     mov [rax], rcx ; __errno_location sets rax as a pointer to errno. 
     mov rax, -1 ; after setting errno we overwrite rax to -1 since we need to return -1 when an error occurd.
     ret

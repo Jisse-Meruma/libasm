@@ -2,6 +2,7 @@
 #include "libasm.h"
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h>
 #include <stdlib.h>
 
 void test_ft_strlen() 
@@ -73,6 +74,12 @@ void test_ft_read()
     if (result == -1) {
         perror("ft_read failed");
     }
+}
+
+int ft_gekkecmp(const char *str1, const char* str2)
+{
+    printf("Comparing bish, %s + %s\n", str1, str2);
+    return strcmp(str1, str2);
 }
 
 void test_ft_strdup() 
@@ -160,7 +167,7 @@ void test_ft_list_remove_if()
     printf("List size before removal: %d\n", ft_list_size(list));
 
     // Remove elements equal to "42"
-    ft_list_remove_if(&list, "42", (int (*)(void*, void*))strcmp, free);
+    ft_list_remove_if(&list, "42", (int (*)(void*, void*))ft_gekkecmp, free);
 
     printf("List size after removal: %d\n", ft_list_size(list));
 
@@ -210,13 +217,31 @@ void test_ft_list_sort()
     free(list);
 }
 
+void test_ft_atoi_base() 
+{
+    char *str1 = "42";
+    char *base1 = "0123456789";
+    char *str2 = "-+42";
+    char *base2 = "0123456789";
+    char *str3 = "101011";
+    char *base3 = "01";
+    char *str4 = "FF";
+    char *base4 = "0123456789ABCDEF";
+
+    printf("\nTesting ft_atoi_base:\n");
+    printf("Converting '%s' with base '%s': %d | correct_output: %d\n", str1, base1, ft_atoi_base(str1, base1), atoi(str1));
+    printf("Converting '%s' with base '%s': %d | correct_output: %d\n", str2, base2, ft_atoi_base(str2, base2), atoi(str2));
+    printf("Converting '%s' with base '%s': %d | correct_output: %d\n", str3, base3, ft_atoi_base(str3, base3), atoi(str3));
+    printf("Converting '%s' with base '%s': %d | correct_output: %d\n", str4, base4, ft_atoi_base(str4, base4), atoi(str4));
+}
+
 int main() 
 {
     test_ft_strlen();
     test_ft_strcpy();
     test_ft_strcmp();
     test_ft_write();
-    // test_ft_read();
+    test_ft_read();
     test_ft_strdup();
 
     test_ft_push_front();
@@ -225,31 +250,4 @@ int main()
     test_ft_list_sort();
     test_ft_atoi_base();  
 }
-
-int ft_atoi_base(char* str, char* base)
-{
-    int i = 0;
-    int sign = 0;
-
-    while (isspace(str[i]))
-        i++;
-    while (str[i] != '\0' && (str[i] == '-' || str[i] == '+'))
-    {
-        i++;
-        sign++;
-    }
-    sign = sign % 2;
-    if (sign == 1)
-        sign = -1;
-    
-
-}
-
-
-
-
-
-
-
-
 

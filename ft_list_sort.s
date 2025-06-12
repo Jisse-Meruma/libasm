@@ -37,6 +37,10 @@ ft_list_sort:
     push r14
     push r15
     push r15 ; for stinky stack alligment
+    test rdi, rdi
+    jz .end
+    test rsi, rsi
+    jz .end
 
     mov r13, rsi ; cmp
     mov r15, rdi ; **begin_list

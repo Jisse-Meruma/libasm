@@ -56,6 +56,10 @@ ft_list_remove_if:
     mov r15, rcx ; (*free_fct)(void*)
     test r12, r12
     jz .end
+    test r14, r14
+    jz .end
+    test r15, r15
+    jz .end
     mov rbx, [r12] ; copy node struct out of head
     
 .loop:

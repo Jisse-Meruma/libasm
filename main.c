@@ -88,12 +88,6 @@ void test_ft_read()
     }
 }
 
-int ft_gekkecmp(const char *str1, const char* str2)
-{
-    printf("Comparing bish, %s + %s\n", str1, str2);
-    return strcmp(str1, str2);
-}
-
 void test_ft_strdup() 
 {
     char *str1 = "Hello, World!";
@@ -105,21 +99,14 @@ void test_ft_strdup()
     char *dup2 = ft_strdup(str2);
     char *dup3 = ft_strdup(str3);
 
-    char *correct_dup1 = strdup(str1);
-    char *correct_dup2 = strdup(str2);
-    char *correct_dup3 = strdup(str3);
-
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str1, dup1, correct_dup1);
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str2, dup2, correct_dup2);
-    printf("Duplicate of '%s': '%s' | correct_output: '%s'\n", str3, dup3, correct_dup3);
+    printf("Duplicate of '%s': '%s'\n", str1, dup1);
+    printf("Duplicate of '%s': '%s'\n", str2, dup2);
+    printf("Duplicate of '%s': '%s'\n", str3, dup3);
 
     // Free the duplicated strings
     free(dup1);
     free(dup2);
     free(dup3);
-    free(correct_dup1);
-    free(correct_dup2);
-    free(correct_dup3);
 }
 
 void test_ft_push_front() 
@@ -156,7 +143,6 @@ void test_ft_list_size()
 
     printf("\nTesting ft_list_size:\n");
     ft_list_push_front(&list, data1);
-    printf("\n Adding first element: %s\n", (char *)list->data);
     printf("List size after adding first element: %d\n", ft_list_size(list));
 
     ft_list_push_front(&list, data2);
@@ -173,7 +159,7 @@ void test_ft_list_remove_if()
 {
     t_list *list = NULL;
     char* data1 = ft_strdup("42");
-    char* data2 = ft_strdup("42");
+    char* data2 = ft_strdup("22");
     char* data3 = ft_strdup("42");
     char* data4 = ft_strdup("42"); // Duplicate to test removal
 
@@ -186,7 +172,7 @@ void test_ft_list_remove_if()
     printf("List size before removal: %d\n", ft_list_size(list));
 
     // Remove elements equal to "42"
-    ft_list_remove_if(&list, "42", (int (*)(void*, void*))ft_gekkecmp, free);
+    ft_list_remove_if(&list, "42", (int (*)(void*, void*))strcmp, free);
 
     printf("List size after removal: %d\n", ft_list_size(list));
 
@@ -242,11 +228,11 @@ void test_ft_atoi_base()
 {
     char *str1 = "42";
     char *base1 = "0123456789";
-    char *str2 = "-+42";
+    char *str2 = "-+42b";
     char *base2 = "0123456789";
     char *str3 = "101011";
     char *base3 = "01";
-    char *str4 = "FF";
+    char *str4 = "FFACD";
     char *base4 = "0123456789ABCDEF";
 
     printf("\nTesting ft_atoi_base:\n");
@@ -258,17 +244,27 @@ void test_ft_atoi_base()
 
 int main() 
 {
+    char *buffer[1];
     test_ft_strlen();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_strcpy();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_strcmp();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_write();
-    // test_ft_read();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
+    test_ft_read();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_strdup();
-
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_push_front();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_list_size();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_list_remove_if();
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
     test_ft_list_sort();
-    test_ft_atoi_base();  
+    read(0, buffer, 1); // This is just to test ft_read, it will not do anything useful.
+    test_ft_atoi_base();
 }
 
